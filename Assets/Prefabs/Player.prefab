@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9040389659461768177}
   - component: {fileID: 4233266245099198535}
   - component: {fileID: 5205667985277396830}
+  - component: {fileID: 5930404235742128958}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -154,6 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f40d5ff26e9c24c9f8a9fa2fd7dcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InvActive: 0
+  InventoryCanvas: {fileID: 0}
+  Flashlight: {fileID: 825115696756886801}
   moveSpeed: 5
   jumpHeight: 1.5
   gravity: -9.81
@@ -256,6 +260,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5930404235742128958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7376906464354561677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5120a970703ebfa4faef001a054d7683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiAndShit
+  bandagecount: 0
 --- !u!1 &8053967829219103886
 GameObject:
   m_ObjectHideFlags: 0
