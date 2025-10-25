@@ -12,19 +12,23 @@ public class FPMovement : MonoBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float mouseSensitivity = 2f;
     [SerializeField] float interactDistance = 3f;
+    private bool crouching;
+    [SerializeField] CapsuleCollider playerCol;
+
 
     private CharacterController myCC;
     private GameObject mainCamera;
     private Camera playerCamera;
     private Vector3 velocity;
     private float yRotation = 0f;
+    private bool crouchblock;
 
     void Start()
     {
         InvActive = false;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera"); //finds main camera
-        mainCamera.SetActive(false);    //disables main camera
+        mainCamera.SetActive(true);    //disables main camera
 
         myCC = GetComponent<CharacterController>(); //sets up short had refernce (myCC) for character controller
 
@@ -45,6 +49,35 @@ public class FPMovement : MonoBehaviour
 
     void Update()
     {
+        crouchblock = Physics.Raycast(transform.position, transform.up, 1.2f);
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            crouching = true;
+        }
+
+        else
+        {
+            crouching = false;
+        }
+
+        if (crouching)
+        {
+            playerCamera.transform.localPosition = new Vector3(0,0,0);
+            moveSpeed = 2f;
+            playerCol.height = 0.5f;
+            myCC.height = .5f;
+        }
+
+        else if (!crouching & !crouchblock)
+        {
+            playerCamera.transform.localPosition = new Vector3(0, 0.8f, 0);
+            moveSpeed = 5f;
+            playerCol.height = 2f;
+            myCC.height = 2f;
+        }
+
+        //Debug.Log(crouching);
 
         if (Input.GetKeyDown(KeyCode.F) & Flashlight.intensity > 0)
         {
@@ -63,6 +96,18 @@ public class FPMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
        }
+
+        else if (Input.GetKeyDown(KeyCode.I) & InvActive == true)
+        {
+            InventoryCanvas.SetActive(false);
+            InvActive = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+
+
+      
 
         HandleMovement();  // calls movement code below
         HandleMouseLook(); // calls look code below

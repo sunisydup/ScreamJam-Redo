@@ -26,8 +26,7 @@ public class EnemyChanceTrigger : MonoBehaviour
     {
         RNGChance = Random.Range(0, 100);
         Debug.Log(RNGChance);
-        EnemyRot = transform.rotation = Quaternion.Euler(0, 0, -90);
-        EnemyPos = new Vector3(-5, 1.2f, 0.7f);
+        
 
         if (RNGChance > EnemyLikelyness)
         {
